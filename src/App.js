@@ -6,7 +6,7 @@ import TextRepeaterButton from './components/TextRepeaterButton';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App dark">
       <h1><span>Fancy Buttons!</span></h1>
       <section>
         <AngryButton />
