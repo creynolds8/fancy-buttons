@@ -3,21 +3,28 @@ import AngryButton from './components/AngryButton';
 import CounterButton from './components/CounterButton';
 import LightSwitchButton from './components/LightSwitchButton';
 import TextRepeaterButton from './components/TextRepeaterButton';
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 
 function App() {
+  // const increaseAnger = (amount) => amount < 1 ? setAngryApp(angryApp + amount) : setAngryApp(0);
+  // above version of increase anger was not correctly resetting after displaying angry message...
+
+  const [ angryApp, dispatch ] = useReducer((angryApp, amount) => {
+    return angryApp > 1 ? 0 : angryApp + amount;
+  }, 0);
+
   const [ light, setLight ] = useState('off');
   const dark = (light === 'off' ? 'dark' : '')
   const switchLight = () => setLight(light === 'off' ? 'on' : 'off')
 
   return (
     <div className={`App ${dark}`}>
-      <h1><span>Fancy Buttons!</span></h1>
+      <h1>{angryApp < 1 ? "Fancy Buttons!" : "YOU'RE CLICKING TOO MANY BUTTONS!"}</h1>
       <section>
-        <AngryButton />
-        <CounterButton />
-        <LightSwitchButton light={light} switchLight={switchLight} />
-        <TextRepeaterButton />
+        <AngryButton increaseAnger={dispatch} />
+        <CounterButton increaseAnger={dispatch} />
+        <LightSwitchButton light={light} switchLight={switchLight} increaseAnger={dispatch} />
+        <TextRepeaterButton increaseAnger={dispatch} />
       </section>
     </div>
   );

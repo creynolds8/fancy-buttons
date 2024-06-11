@@ -1,6 +1,9 @@
 export default function LightSwitchButton(props) {
   const { light, switchLight } = props;
-  const handleClick = () => switchLight();
+  const handleClick = () => {
+    switchLight();
+    props.increaseAnger(0.1);
+  }
   return (
     <button className="LightSwitchButton" onClick={handleClick}>
       {light === "on" && <span><i>💡</i> I'm on!</span>}
