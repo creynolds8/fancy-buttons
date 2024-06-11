@@ -6,9 +6,10 @@ export default function TextRepeaterButton() {
   for (let i = 0; i < repititions; i++) {
     textArr.push(<span key={i}>I like this text</span>);
   }
+  const handleClick = () => setRepititions(repititions + 1)
 
   return (
-    <button className="TextRepeaterButton">
+    <button onClick={handleClick} className="TextRepeaterButton">
       {textArr}
     </button>
   );
